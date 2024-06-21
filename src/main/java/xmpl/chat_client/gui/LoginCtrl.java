@@ -24,10 +24,12 @@ public class LoginCtrl{
     @FXML
     void login(ActionEvent event) throws JMSException, NamingException, IOException {
         if(nickName.getText().isEmpty()){
-            info.setText("Podaj nickName");
+            info.setText("Podaj nickname");
         } else {
             if(ChatClient.runChatClient(nickName.getText())) {
                 SceneCtrl.switchToChat(event);
+            } else {
+                info.setText("Nickname zajęty");
             }
         }
     }
@@ -40,6 +42,8 @@ public class LoginCtrl{
             } else {
                 if (ChatClient.runChatClient(nickName.getText())) {
                     SceneCtrl.switchToChat(event);
+                } else {
+                    info.setText("Nickname zajęty");
                 }
             }
         }

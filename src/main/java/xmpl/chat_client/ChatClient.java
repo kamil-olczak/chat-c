@@ -15,19 +15,15 @@ public class ChatClient {
     private static String nickName;
 
     public static boolean runChatClient(String nick) throws JMSException, NamingException {
-
         Hashtable env = new Hashtable(11);
         env.put(Context.INITIAL_CONTEXT_FACTORY, "org.apache.activemq.jndi.ActiveMQInitialContextFactory");
         env.put(Context.PROVIDER_URL, "tcp://localhost:61616");
         env.put("topic.myTopic", "myTopic");
-
         Context context = new InitialContext(env);
 
-//        Context context = new InitialContext();
         ConnectionFactory fact = (ConnectionFactory) context.lookup("ConnectionFactory");
         String admDestName = "myTopic";
         Destination dest = (Destination) context.lookup(admDestName);
-
         nickName = nick;
         connection = fact.createConnection();
         try {
